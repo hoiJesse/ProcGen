@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dogq4qpk50tp"]
+
+[ext_resource type="Script" uid="uid://b04ov2euf4avn" path="res://Code/Main.cs" id="1_idj7w"]
+[ext_resource type="MeshLibrary" uid="uid://cymke8kgmgh7" path="res://Resources/Blocz.tres" id="2_idj7w"]
+[ext_resource type="ArrayMesh" uid="uid://byap1xvdl3cfu" path="res://Resources/mlow.tres" id="2_kln2b"]
+[ext_resource type="ArrayMesh" uid="uid://ebyu3q3n6ipl" path="res://Resources/mhigh.tres" id="2_pbw6q"]
+[ext_resource type="ArrayMesh" uid="uid://cunehhbh1ujfn" path="res://Resources/mwater.tres" id="4_v1gob"]
+[ext_resource type="Script" uid="uid://dm04pwg7mp0t6" path="res://Code/Camera3d.cs" id="5_50glp"]
+[ext_resource type="Script" uid="uid://8d2oqritnur7" path="res://Code/View.cs" id="5_v1gob"]
+[ext_resource type="Script" uid="uid://btkw0aqio8ohn" path="res://Code/Test.cs" id="7_jw32o"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rgh2o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v1gob"]
+
+[node name="Main" type="Node3D" unique_id=1884330793 node_paths=PackedStringArray("GridMapLow", "GridMapHigh", "GridMapWater")]
+script = ExtResource("1_idj7w")
+GridMapLow = NodePath("GridMapLow")
+GridMapHigh = NodePath("GridMapHigh")
+GridMapWater = NodePath("GridMapWater")
+mhigh = ExtResource("2_pbw6q")
+mlow = ExtResource("2_kln2b")
+mwater = ExtResource("4_v1gob")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1735157067]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 127, 256, 127)
+script = ExtResource("5_50glp")
+
+[node name="Label" type="Label" parent="Camera3D" unique_id=2028903766]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Label2" type="Label" parent="Camera3D" unique_id=1244971658]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+horizontal_alignment = 2
+
+[node name="GridMapLow" type="GridMap" parent="." unique_id=1862791722]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh_library = ExtResource("2_idj7w")
+physics_material = SubResource("PhysicsMaterial_rgh2o")
+
+[node name="GridMapHigh" type="GridMap" parent="." unique_id=1327779387]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh_library = ExtResource("2_idj7w")
+physics_material = SubResource("PhysicsMaterial_rgh2o")
+
+[node name="GridMapWater" type="GridMap" parent="." unique_id=2127399924]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh_library = ExtResource("2_idj7w")
+physics_material = SubResource("PhysicsMaterial_rgh2o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=206530324]
+transform = Transform3D(-1, 6.18172e-08, -6.18172e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 128, 100, 0)
+shadow_enabled = true
+
+[node name="Test" type="CharacterBody3D" parent="." unique_id=923946170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 80, 128)
+script = ExtResource("7_jw32o")
+
+[node name="View" type="Camera3D" parent="Test" unique_id=226512257]
+transform = Transform3D(-4.37114e-08, 0.7071068, -0.7071068, 0, 0.7071068, 0.7071068, 1, 3.090863e-08, -3.090863e-08, -56, 56, 0)
+visible = false
+fov = 90.0
+script = ExtResource("5_v1gob")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Test" unique_id=1827920147]
+shape = SubResource("BoxShape3D_v1gob")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Test" unique_id=1853926879]
+mesh = ExtResource("4_v1gob")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Test" unique_id=996381770]
+light_color = Color(1, 0, 0, 1)
+light_energy = 16.0
